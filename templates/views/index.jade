@@ -1,0 +1,66 @@
+extends layout
+
+block head
+  //- link(href='http://js-grid.com/css/jsgrid.min.css', rel='stylesheet')
+  //- link(href='http://js-grid.com/css/jsgrid-theme.min.css', rel='stylesheet') 
+  link(rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+  link(href='http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css', rel='stylesheet')
+  link(href='css/jsgrid.min.css', rel='stylesheet',type="text/css")
+  link(href='css/jsgrid-theme.min.css', rel='stylesheet',type="text/css") 
+  link(href='css/style.css', rel='stylesheet',type="text/css")
+
+block content
+  ul#menu
+    if ( locals.data.user != undefined )
+      each table in locals.data.tables
+        li
+          if(locals.data.inqurytable == table.table_name)
+            a.active(href='?table_name='+ table.table_name)=table.table_name
+          else
+            a(href='?table_name='+ table.table_name)=table.table_name
+      li 
+        span=locals.data.user.email
+        a(href='/keystone/signout') Sign Out
+  input(type='hidden', id='fields', value=locals.data.fields)
+  input(type='hidden', id='table_accesses', value=locals.data.table_accesses)  
+  input(type='hidden', id='inqurytable', value=locals.data.inqurytable)
+
+  div#jsGrid
+
+  if(locals.data.inqurytable == '新总表')
+    div#dlgDetails(title='Dialog Title')
+      table.tg
+        tr
+          th.tg-s6z2(rowspan='5', id="name")
+          th.tg-amwm(colspan='5') Toplight
+        tr
+          td.tg-9hbo P/N
+          td.tg-baqh(colspan='4', id="P_N")
+        tr
+          td.tg-9hbo Description
+          td.tg-baqh(colspan='4', id="Description")
+        tr
+          td.tg-9hbo VF(v)
+          td.tg-yw4l(id="VF")
+          td.tg-9hbo Tc(K)/λd(nm)
+          td.tg-yw4l(colspan='2',id = "Tc_λd")
+        tr
+          td.tg-9hbo Φv (lm)/IV(mcd)
+          td.tg-yw4l(id="Φv_IV")
+          td.tg-9hbo Quantity
+          td.tg-yw4l(id="Quantity")
+          td.tg-yw4l PCS
+
+
+block scripts
+  script(src='http://js-grid.com/js/jsgrid.min.js')
+  script(src='/js/moment.js')
+  script(src='js/locale/zh-cn.js')
+  script.
+    moment.locale('zh-cn');
+  script(src='/js/datepicker-zh-CN.js')
+  script(src='/js/imagefield.js')
+  script(src='/js/datefield.js')
+  script(src='/js/usmoneyfield.js')
+  script(src='/js/cnymoneyfield.js')
+  script(src='/js/jsgrid-sophia.js')
