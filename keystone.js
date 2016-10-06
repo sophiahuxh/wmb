@@ -16,7 +16,7 @@ var bodyParser = require('body-parser');
 
 var mongo = require('mongodb');
 var monk = require('monk');
-var db = monk('localhost:27017/jsgrid-keystone');
+var db = monk(process.env.MONGO_URI);
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));

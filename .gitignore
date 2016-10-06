@@ -35,3 +35,4 @@ test
 
 # Ignore mongo data
 data
+datadump
