@@ -17,5 +17,7 @@ ADD . /src
 # Install app dependencies
 RUN cd /src; npm install
 
+WORKDIR /src
+
 EXPOSE  80
-CMD ["node", "/src/keystone.js"]
+CMD ["node", "keystone.js"]
