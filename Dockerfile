@@ -5,7 +5,7 @@
 # 2. Checkout source: git@github.com:gasi/docker-node-hello.git
 # 3. Build container: docker build .
 
-FROM    node
+FROM    node:4
 
 # App
 ADD . /src
